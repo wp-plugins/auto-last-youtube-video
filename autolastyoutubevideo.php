@@ -3,14 +3,14 @@
 Plugin Name: Auto Last Youtube Video
 Plugin URI: http://wordpress.org/plugins/auto-last-youtube-video/
 Description: This plugin providesboth Widget and Shortcode to show latest videos from any public Youtube channel. Using [auto_last_youtube_video user='channel_name' width='450' height='320'][/auto_last_youtube_video] in a page or post will show last video uploaded to that channel and will change if another video is uploaded. The widget let you show as many videos as you want from any Youtube channel.
-Version: 1.0.0
+Version: 1.0.1
 Author: davidmerinas
 Author URI: http://www.davidmerinas.com
 */
 define('AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID', "widget_AUTO_LAST_YOUTUBE_VIDEO");
 $_SESSION['AUTO_LAST_YOUTUBE_VIDEO_PATH']=plugin_dir_path( __FILE__ );
  
-function AUTO_LAST_YOUTUBE_VIDEO_showvideo($canal='davidmerinas',$number=1,$title=""){
+function AUTO_LAST_YOUTUBE_VIDEO_showvideo($canal='davidmerinas',$number=1,$title="",$visittext="Visit Youtube Channel"){
 	global $wp_embed;
 	$videos=youtube($canal,$number);
 	echo('<h2 class="widget-title">'.($title!=""?$title:__("Latest from Youtube","autolastyoutubevideo")).'</h2>');
@@ -19,7 +19,7 @@ function AUTO_LAST_YOUTUBE_VIDEO_showvideo($canal='davidmerinas',$number=1,$titl
 		echo($wp_embed->run_shortcode('[embed]http://www.youtube.com/watch?v='.$video['idyoutube'].'[/embed]'));
 	}
 
-	echo('<a id="autolasvideoseeall" href="http://www.youtube.com/user/'.$canal.'" title="'.__("Visit Youtube Channel","autolastyoutubevideo").'">'.__("Visit Youtube Channel","autolastyoutubevideo").'</a>');
+	echo('<a id="autolasvideoseeall" href="http://www.youtube.com/user/'.$canal.'" title="'.$visittext.'">'.$visittext.'</a>');
 }
 
 function youtube($canal,$lim=1)
@@ -76,12 +76,14 @@ function widget_AUTO_LAST_YOUTUBE_VIDEO_control() {
 		$options['AUTO_LAST_YOUTUBE_VIDEO_title'] = $widget_data['AUTO_LAST_YOUTUBE_VIDEO_title'];
 		$options['AUTO_LAST_YOUTUBE_VIDEO_channelurl'] = $widget_data['AUTO_LAST_YOUTUBE_VIDEO_channelurl'];
 		$options['AUTO_LAST_YOUTUBE_VIDEO_number'] = $widget_data['AUTO_LAST_YOUTUBE_VIDEO_number'];
+		$options['AUTO_LAST_YOUTUBE_VIDEO_visittext'] = $widget_data['AUTO_LAST_YOUTUBE_VIDEO_visittext'];
 		update_option(AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID, $options);
 	}
 	// Datos para el formulario
 	$AUTO_LAST_YOUTUBE_VIDEO_title = $options['AUTO_LAST_YOUTUBE_VIDEO_title'];
 	$AUTO_LAST_YOUTUBE_VIDEO_channelurl = $options['AUTO_LAST_YOUTUBE_VIDEO_channelurl'];
 	$AUTO_LAST_YOUTUBE_VIDEO_number = $options['AUTO_LAST_YOUTUBE_VIDEO_number'];
+	$AUTO_LAST_YOUTUBE_VIDEO_visittext = $options['AUTO_LAST_YOUTUBE_VIDEO_visittext'];
 	
 	// Codigo HTML del formulario	
 	?>
@@ -104,6 +106,16 @@ function widget_AUTO_LAST_YOUTUBE_VIDEO_control() {
 	    name="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID; ?>[AUTO_LAST_YOUTUBE_VIDEO_channelurl]"
 	    id="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID; ?>-channelurl"
 	    value="<?php echo $AUTO_LAST_YOUTUBE_VIDEO_channelurl; ?>"/>
+	</p>
+	<p>
+	  <label for="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID;?>-channelurl">
+	    <?php _e('Anchor Text Channel URL','autolastyoutubevideo');?>
+	  </label>
+	  <input class="widefat"
+	    type="text"
+	    name="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID; ?>[AUTO_LAST_YOUTUBE_VIDEO_visittext]"
+	    id="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID; ?>-visittext"
+	    value="<?php echo $AUTO_LAST_YOUTUBE_VIDEO_visittext; ?>"/>
 	</p>
 	<p>
 	  <label for="<?php echo AUTO_LAST_YOUTUBE_VIDEO_WIDGET_ID;?>-number">
@@ -129,9 +141,10 @@ function widget_AUTO_LAST_YOUTUBE_VIDEO($args) {
 	$AUTO_LAST_YOUTUBE_VIDEO_title = $options["AUTO_LAST_YOUTUBE_VIDEO_title"];
 	$AUTO_LAST_YOUTUBE_VIDEO_channelurl = $options["AUTO_LAST_YOUTUBE_VIDEO_channelurl"];
 	$AUTO_LAST_YOUTUBE_VIDEO_number = $options["AUTO_LAST_YOUTUBE_VIDEO_number"];
+	$AUTO_LAST_YOUTUBE_VIDEO_visittext = $options["AUTO_LAST_YOUTUBE_VIDEO_visittext"];
 
 	echo $before_widget;
-	AUTO_LAST_YOUTUBE_VIDEO_showvideo($AUTO_LAST_YOUTUBE_VIDEO_channelurl,$AUTO_LAST_YOUTUBE_VIDEO_number,$AUTO_LAST_YOUTUBE_VIDEO_title);
+	AUTO_LAST_YOUTUBE_VIDEO_showvideo($AUTO_LAST_YOUTUBE_VIDEO_channelurl,$AUTO_LAST_YOUTUBE_VIDEO_number,$AUTO_LAST_YOUTUBE_VIDEO_title,$AUTO_LAST_YOUTUBE_VIDEO_visittext);
 	echo $after_widget;
 }
 

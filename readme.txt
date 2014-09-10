@@ -3,7 +3,7 @@ Contributors: davidmerinas
 Donate link: http://957.be/donatedavidmerinas
 Tags: youtube,last videos,shortcode,widget,davidmerinas
 Requires at least: 3.3
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,12 +16,12 @@ This plugin provides both Widget and Shortcode to show latest videos from any pu
 
 == Installation ==
 
-1. Uncompress the file and upload the folder ‘auto’-last-youtube-video to the '/wp-content/plugins/' directory
+1. Uncompress the file and upload the folder �auto-last-youtube-video to the '/wp-content/plugins/' directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 To activate the widget:
 3. Go to 'Widgets' menu and drag and drop 'Auto Last Youtube Video' widget to your prefered sidebar
-4. Configure the widget: fill in the title and channel name and select the number of video to show
+4. Configure the widget: fill in the title, channel name and anchor text and select the number of video to show
 5. Click on "Save"
 
 To use the shortcode:
@@ -37,6 +37,8 @@ Not yet
 
 
 == Changelog ==
+= 1.0.1 =
+*Now you can select your own anchor text for link to channel
 
 = 1.0 =
 *First stable version
