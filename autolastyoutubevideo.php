@@ -3,7 +3,7 @@
 Plugin Name: Auto Last Youtube Video
 Plugin URI: http://wordpress.org/plugins/auto-last-youtube-video/
 Description: This plugin providesboth Widget and Shortcode to show latest videos from any public Youtube channel. Using [auto_last_youtube_video user='channel_name' width='450' height='320'][/auto_last_youtube_video] in a page or post will show last video uploaded to that channel and will change if another video is uploaded. The widget let you show as many videos as you want from any Youtube channel.
-Version: 1.0.1
+Version: 1.0.2
 Author: davidmerinas
 Author URI: http://www.davidmerinas.com
 */

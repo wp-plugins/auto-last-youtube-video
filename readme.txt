@@ -37,6 +37,9 @@ Not yet
 
 
 == Changelog ==
+= 1.0.2 =
+*Trying to fix some library path errors
+
 = 1.0.1 =
 *Now you can select your own anchor text for link to channel
 
