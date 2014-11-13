@@ -37,6 +37,9 @@ Not yet
 
 
 == Changelog ==
+= 1.0.3 =
+*Added optional intro text to the widget
+
 = 1.0.2 =
 *Trying to fix some library path errors
 
