@@ -37,6 +37,9 @@ Not yet
 
 
 == Changelog ==
+= 1.0.4 =
+*Changed Youtube Feed URL
+
 = 1.0.3 =
 *Added optional intro text to the widget
 

@@ -3,7 +3,7 @@
 Plugin Name: Auto Last Youtube Video
 Plugin URI: http://wordpress.org/plugins/auto-last-youtube-video/
 Description: This plugin providesboth Widget and Shortcode to show latest videos from any public Youtube channel. Using [auto_last_youtube_video user='channel_name' width='450' height='320'][/auto_last_youtube_video] in a page or post will show last video uploaded to that channel and will change if another video is uploaded. The widget let you show as many videos as you want from any Youtube channel.
-Version: 1.0.3
+Version: 1.0.4
 Author: davidmerinas
 Author URI: http://www.davidmerinas.com
 */
@@ -29,8 +29,7 @@ function AUTO_LAST_YOUTUBE_VIDEO_showvideo($canal='davidmerinas',$number=1,$titl
 function youtube($canal,$lim=1)
 {
 	require_once 'inc/Zend/Feed.php';
-	$url="http://gdata.youtube.com/feeds/base/users/".$canal."/uploads?alt=rss&v=2&orderby=published";
-
+	$url="https://www.youtube.com/feeds/videos.xml?user=".$canal;
 	$rss=new Zend_Feed();
 	$channel = $rss->import($url);
 	$i=0;
@@ -39,10 +38,9 @@ function youtube($canal,$lim=1)
 	{
 		if ($i<$lim)
 		{
-			$urlvideo=str_replace("&feature=youtube_gdata","",$item->link);
-			$urlvideo=str_replace("watch?","",$urlvideo);
-			$urlvideo=str_replace("=","/",$urlvideo);
-			$idyoutube=str_replace('http://www.youtube.com/v/','',$urlvideo);
+			$urlvideo=$item->link("alternate");
+			$urlvideo=str_replace("http://www.youtube.com/watch?v=","",$urlvideo);
+			$idyoutube=$urlvideo;
 			$respuesta[]=array('idyoutube'=>$idyoutube,'imagen'=>'http://i.ytimg.com/vi/'.$idyoutube.'/maxresdefault.jpg');
 		}
 		$i++;
